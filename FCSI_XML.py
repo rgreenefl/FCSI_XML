@@ -1,4 +1,5 @@
-# Environment Canada Federal Contaminated Sites Inventory (FCS) XML parser/exporter
+# Environment Canada Federal Contaminated Sites Inventory (FCSI) XML parser/exporter
+# Tested with Python 2.7.10
 # Created by Randal Greene (rgreene@feaverslane.com), January 2018
 
 # Input: XML dump of contaminated sites, described at https://www.tbs-sct.gc.ca/fcsi-rscf/home-accueil-eng.aspx and
