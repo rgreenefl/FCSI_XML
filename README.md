@@ -1,5 +1,5 @@
 # FCSI_XML
-Environment Canada Federal Contaminated Sites Inventory (FCS) Python XML parser/exporter
+Environment Canada Federal Contaminated Sites Inventory (FCSI) Python XML parser/exporter
 Tested with Python 2.7.10
 Created by Randal Greene (rgreene@feaverslane.com), January 2018
 
