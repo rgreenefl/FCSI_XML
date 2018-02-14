@@ -11,7 +11,9 @@ Output: CSV tables that can be imported into a relational database system or GIS
 
 Note:
 * Exports UTF-8 encoding; non-ASCII characters will display incorrectly in Excel, which assumes UTF-16
-* Force Site ID to be quoted (string) because initial row appears numeric, but it is alphanumeric in some rows
+* Force Site ID to be quoted (string) because initial row appears numeric, but it is alphanumeric in some rows:
+    - In Excel, do this by customizing the CSV import specification
+    - In ArcGIS, use a schema.ini file
 * To output French text, search and replace 'EN' with 'FR'; you may also want to translate field names
 * Some sites have no lat/lon, even though LocationMiniMapURL shows a point for them!
 * Consider enhancement to extract the following repeating values into lookup tables:

@@ -6,7 +6,10 @@
 #        downloaded from https://www.tbs-sct.gc.ca/fcsi-rscf/opendata-eng.aspx
 # Output: CSV tables that can be imported into a relational database system or GIS software
 # Note: Exports UTF-8 encoding; non-ASCII characters will display incorrectly in Excel, which assumes UTF-16
-#       Force Site ID to be quoted (string) because initial row appears numeric, but it is alphanumeric in some rows
+#       You may need to force Site ID to a string when importing because initial row appears numeric, but it is
+#       alphanumeric in some rows:
+#           In Excel, do this by customizing the CSV import specification
+#           In ArcGIS, use a schema.ini file
 #       To output French text, search and replace 'EN' with 'FR'; you may also want to translate field names
 #       Some sites have no lat/lon, even though LocationMiniMapURL shows a point for them!
 #       Consider enhancement to extract the following repeating values into lookup tables:
@@ -166,7 +169,7 @@ try:
             population_km25 = optional_element_lookup(site, 'PopulationCounts', 'KM25')
             population_km50 = optional_element_lookup(site, 'PopulationCounts', 'KM50')
             # output row
-            site_writer.writerow(['"' + site.get('FederalSiteIdentifier') + '"',
+            site_writer.writerow([site.get('FederalSiteIdentifier'),
                                   site.get('ReportingOrganization'),
                                   site.get('Created'),
                                   site.get('LastModified'),
@@ -200,7 +203,7 @@ try:
             management_strategy = site.find("ManagementStrategy")
             if management_strategy is not None:
                 for management_type in management_strategy.findall("ManagementType"):
-                    management_strategy_writer.writerow(['"' + site.get('FederalSiteIdentifier') + '"',
+                    management_strategy_writer.writerow([site.get('FederalSiteIdentifier'),
                                                          management_type.get('code'),
                                                          management_type.find('EN').text])
             contamination_details = site.find('ContaminationDetails')
@@ -208,7 +211,7 @@ try:
                 contaminated_media = contamination_details.findall("ContaminatedMedia")
                 if contaminated_media is not None:
                     for contaminated_medium in contaminated_media:
-                        contaminated_medium_writer.writerow(['"' + site.get('FederalSiteIdentifier') + '"',
+                        contaminated_medium_writer.writerow([site.get('FederalSiteIdentifier'),
                                                              contaminated_medium.find('Contamination').get('code'),
                                                              contaminated_medium.find('Contamination').find('EN').text,
                                                              contaminated_medium.find('Medium').get('code'),
@@ -223,7 +226,7 @@ try:
                 remediation_amount_cubic_tons = optional_element_lookup(annual_data,
                                                                         'RemediationAmounts',
                                                                         'Tons')
-                annual_data_writer.writerow(['"' + site.get('FederalSiteIdentifier') + '"',
+                annual_data_writer.writerow([site.get('FederalSiteIdentifier'),
                                              annual_data.get('FiscalYear'),
                                              annual_data.get('ReportingOrganization'),
                                              annual_data.find('HighestStepCompleted').text,
